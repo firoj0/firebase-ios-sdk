@@ -147,8 +147,11 @@ extension SafetyRating.HarmProbability: Codable {
   public init(from decoder: Decoder) throws {
     let value = try decoder.singleValueContainer().decode(String.self)
     guard let decodedProbability = SafetyRating.HarmProbability(rawValue: value) else {
-      Logging.default
-        .error("[FirebaseVertexAI] Unrecognized HarmProbability with value \"\(value)\".")
+      Logging.logEvent(
+        level: .error,
+        message: "Unrecognized HarmProbability with value \"\(value)\".",
+        messageCode: .generateContentResponseUnrecognizedHarmProbability
+      )
       self = .unknown
       return
     }
@@ -168,8 +171,11 @@ extension SafetySetting.HarmCategory: Codable {
   public init(from decoder: Decoder) throws {
     let value = try decoder.singleValueContainer().decode(String.self)
     guard let decodedCategory = SafetySetting.HarmCategory(rawValue: value) else {
-      Logging.default
-        .error("[FirebaseVertexAI] Unrecognized HarmCategory with value \"\(value)\".")
+      Logging.logEvent(
+        level: .error,
+        message: "Unrecognized HarmCategory with value \"\(value)\".",
+        messageCode: .generateContentResponseUnrecognizedHarmCategory
+      )
       self = .unknown
       return
     }
@@ -183,8 +189,11 @@ extension SafetySetting.BlockThreshold: Codable {
   public init(from decoder: Decoder) throws {
     let value = try decoder.singleValueContainer().decode(String.self)
     guard let decodedThreshold = SafetySetting.BlockThreshold(rawValue: value) else {
-      Logging.default
-        .error("[FirebaseVertexAI] Unrecognized BlockThreshold with value \"\(value)\".")
+      Logging.logEvent(
+        level: .error,
+        message: "Unrecognized BlockThreshold with value \"\(value)\".",
+        messageCode: .generateContentResponseUnrecognizedBlockThreshold
+      )
       self = .unknown
       return
     }
